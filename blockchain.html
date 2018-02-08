@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="./assets/img/apple-icon.png">
+    <link rel="icon" href="./assets/img/favicon.png">
+    <title>
+        Deus ex Blockchain
+    </title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./assets/css/material-kit.css?v=2.0.0">
+    <!-- Documentation extras -->
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="./assets/assets-for-demo/demo.css" rel="stylesheet" />
+    <link href="./assets/assets-for-demo/vertical-nav.css" rel="stylesheet" />
+</head>
+
+<body style="background: linear-gradient(to bottom right, purple, black)" id="newblock" class="index-page ">
+    <script src="bundle.js"></script>
+	<body class="index-page ">
+    <nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/officialmcafee" target="_blank" data-original-title="Follow us on Twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/georgetxrc" target="_blank" data-original-title="Like us on Facebook">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/officialjohnmcafee/" target="_blank" data-original-title="Follow us on Instagram">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('http://all4desktop.com/data_images/original/4235885-cool-background.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class="brand">
+                        <h1>Deus ex Blockchain</h1>
+                        <h3>The God of Blockchain Demos</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style = "background:linear-gradient(purple,black)" class =" main main-raised">
+        
+       <div id="blockchainbg" class="section section-signup page-header header-filter clear-filter purple-filter">
+            <div class="container">
+                <div class="row">
+                    <div  class="col-md-4 ml-auto mr-auto">
+                        <div class="card card-signup">
+                            <form class="form" method="" action="">
+                                
+                                <p class="text-divider">Genesis Block</p>
+                                <div class="card-body">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Data">
+                                    </div>
+                                    <div id="">
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="card-footer justify-content-center">
+                                    <a href="javascript:void(0)" onclick = "myFunction()" class="btn btn-primary btn-lg">Add New Block</a>
+                                    <a href="javascript:void(0)" onclick = "myFunction()" class="btn btn-primary btn-lg">Mine Block</a>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+        </div>
+        
+        <div  id="kappa"></div>
+
+        <script>
+            function myFunction() {
+                var elmnt = document.getElementsByTagName("DIV")[11];
+                var cln = elmnt.cloneNode(true);
+                document.getElementById("newblock").appendChild(cln); 
+            }
+        </script>
+        <script>
+            function incHeight() {
+            var el = document.getElementById("blockchainbg");
+            var height = el.offsetHeight;
+            var newHeight = height + 300;
+            el.style.height = newHeight + 'px';
+            }
+        </script>
+        
+    </div>
+    
+
+</body>
+</html>
