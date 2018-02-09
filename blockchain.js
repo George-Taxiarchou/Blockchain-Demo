@@ -1,73 +1,80 @@
-const SHA256 = require("crypto-js/sha256");
-
-class Block {
-    constructor(index, timestamp, data, previousHash = '') {
-        this.index = index;
-        this.previousHash = previousHash;
-        this.timestamp = timestamp;
-        this.data = data;
-        this.hash = this.calculateHash();
-        this.nonce = 0;
+$(document).ready(function () {
+  let i = 0;
+  let number = 0;
+  let genesis = false;
+  class Block {
+    constructor(index, timestamp, data, previousHash) {
+      this.index = "<strong>" + index + "</strong>";
+      this.timestamp = `<strong>` + timestamp + `</strong>`;
+      this.data = `<strong>` + data + `</strong>`;
+      this.previousHash = `<strong>` + previousHash + `</strong>`;
+      this.Hash = "<strong>" + this.calculateHash() + "</strong>";
     }
-
     calculateHash() {
-        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+      return sha256(this.index + this.timestamp + JSON.stringify(this.data)).toString();
     }
-
-    mineBlock(difficulty) {
-        while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
-            this.nonce++;
-            this.hash = this.calculateHash();
-        }
-
-        console.log("BLOCK MINED: " + this.hash);
-    }
-}
-
-
-class Blockchain{
+  }
+  class BlockChain {
     constructor() {
-        this.chain = [this.createGenesisBlock()];
-        this.difficulty = 2;
+      this.chain = [this.createGenesisBlock()];
     }
-
     createGenesisBlock() {
-        return new Block(0, "01/01/2018", "Genesis block", "0");
+      return new Block(i, new Date().toLocaleString(), "Genesis Block");
     }
-
-    getLatestBlock() {
-        return this.chain[this.chain.length - 1];
+    getLast() {
+      return this.chain[this.chain.length - 1];
     }
-
     addBlock(newBlock) {
-        newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.mineBlock(this.difficulty);
+      if(genesis===false){
+        newBlock.Hash = newBlock.calculateHash();
         this.chain.push(newBlock);
+        genesis=true;
+      }
+      else{
+        newBlock.previousHash = "<strong>" + this.getLast().Hash + "</strong>";
+        newBlock.Hash = newBlock.calculateHash();
+        this.chain.push(newBlock);
+      }
     }
+  }
+  let kappaCoin = new BlockChain();
 
-    isChainValid() {
-        for (let i = 1; i < this.chain.length; i++){
-            const currentBlock = this.chain[i];
-            const previousBlock = this.chain[i - 1];
-
-            if (currentBlock.hash !== currentBlock.calculateHash()) {
-                return false;
-            }
-
-            if (currentBlock.previousHash !== previousBlock.hash) {
-                return false;
-            }
-        }
-
-        return true;
+  function addNew() {
+      // if(genesis===false){
+      //   kappaCoin.addBlock(new Block(i,time.toLocaleString(),inputData));
+      // }
+      number++;
+      const inputData = $("#inputField").val();
+      let time = new Date();
+      kappaCoin.addBlock(new Block(i, time.toLocaleString(), inputData));
+      i++;
+  }
+  ///Keydown ENTER function
+  $(document).keydown(function (key) {
+    if (key.keyCode == 13) {
+      $("#inputData").trigger("click");
     }
-}
+  });
+  /////
+  $("#inputData").click(function () {
+    addNew();
+    
+   
+    kappaCoin.chain.forEach(function (newChain) {
+      $("#outputData").append("<div id='" + number + "' class='col-md-12'></div>");
+      $("#" + number).html(JSON.stringify(newChain, null, '<br/>').replace(/[{}"']/g, ""));
+    });
 
-let kappaCoin = new Blockchain();
-console.log('Mining block 1...');
-kappaCoin.addBlock(new Block(1, "20/07/2017", { amount: 4 }));
-
-console.log('Mining block 2...');
-kappaCoin.addBlock(new Block(2, "20/07/2017", { amount: 8 }));
+    $("#inputField").val("");
+  });
 
 
+  $("#Restart").click(function () {
+    genesis = false;
+    i = 0;
+    kappaCoin.chain = [kappaCoin.createGenesisBlock()];
+    $("#inputField").val('');
+    $("#outputData").html('');
+    number = 0;
+  });
+});
